@@ -19,9 +19,9 @@ public class CarController {
     private CarRepository repository;
 
     @GetMapping
-    public ResponseEntity listAllCarsActives(){
-       var allCars = repository.findAllByActiveTrue();
-       return ResponseEntity.ok(allCars);
+    public ResponseEntity listAllCarsActives() {
+        var allCars = repository.findAllByActiveTrue();
+        return ResponseEntity.ok(allCars);
     }
 
     @PostMapping
@@ -70,5 +70,17 @@ public class CarController {
             return ResponseEntity.notFound().build();
         }
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable Long id) {
+
+        Optional<CarEntity> optionalCars = repository.findById(id);
+        if (optionalCars.isPresent()) {
+            CarEntity selectCar = optionalCars.get(); //ERREI aqui, ao usar o ".findById", precisa do "Optional<>", do ".isPresent()" e do ".get()"
+            return ResponseEntity.ok(selectCar);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
