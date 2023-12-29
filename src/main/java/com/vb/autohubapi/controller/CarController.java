@@ -2,6 +2,7 @@ package com.vb.autohubapi.controller;
 
 import com.vb.autohubapi.domain.CarEntity;
 import com.vb.autohubapi.repository.CarRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class CarController {
             System.out.println("dados inseridos: " + updatedCar); //log de depuração
             return ResponseEntity.ok().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new EntityNotFoundException();
         }
     }
 
@@ -67,7 +68,7 @@ public class CarController {
 
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new EntityNotFoundException();
         }
 
     }
@@ -80,7 +81,7 @@ public class CarController {
             CarEntity selectCar = optionalCars.get(); //ERREI aqui, ao usar o ".findById", precisa do "Optional<>", do ".isPresent()" e do ".get()"
             return ResponseEntity.ok(selectCar);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new EntityNotFoundException();
         }
     }
 }
