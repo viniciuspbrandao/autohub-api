@@ -55,6 +55,7 @@ public class CarController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity deleteCar(@PathVariable Long id) {
         System.out.println("Request de inativacao do carro de Id: " + id); //log de depuração
 
