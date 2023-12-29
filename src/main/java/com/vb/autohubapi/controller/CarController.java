@@ -30,7 +30,7 @@ public class CarController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity insertCar(@RequestBody @Valid CarDTO carDTO){
+    public ResponseEntity insertCar(@RequestBody @Valid CarDTO carDTO) {
         System.out.println("Recebendo dados do carro: " + carDTO);
         CarEntity newCar = new CarEntity(carDTO);
         repository.save(newCar);
@@ -40,11 +40,11 @@ public class CarController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity updateCar(@RequestBody @Valid CarDTO carDTO){
+    public ResponseEntity updateCar(@RequestBody @Valid CarDTO carDTO) {
         System.out.println("Recebendo dados do carro: " + carDTO); //log de depuração
         //service
         Optional<CarEntity> optionalCar = repository.findById(carDTO.id());
-        if (optionalCar.isPresent()){
+        if (optionalCar.isPresent()) {
             CarEntity updatedCar = optionalCar.get(); //ERREI aqui, ao usar o ".findById", precisa do "Optional<>", do ".isPresent()" e do ".get()"
             updatedCar.setMarca(carDTO.marca());
             updatedCar.setModelo(carDTO.modelo());
@@ -53,10 +53,17 @@ public class CarController {
             updatedCar.setCor(carDTO.cor());
             System.out.println("dados inseridos: " + updatedCar); //log de depuração
             return ResponseEntity.ok().build();
-        }
-        else {
+        } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteCar(@PathVariable Long id) {
+        System.out.println("Request de exclusao do carro de Id: " + id); //log de depuração
+        repository.deleteById(id);
+        System.out.println("Carro removido com sucesso. ID: " + id); //log de depuração
+        return ResponseEntity.noContent().build();
     }
 
 }
