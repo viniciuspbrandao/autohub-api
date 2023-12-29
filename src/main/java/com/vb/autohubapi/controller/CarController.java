@@ -19,13 +19,9 @@ public class CarController {
     private CarRepository repository;
 
     @GetMapping
-    public ResponseEntity listAllCars() {
-
-        System.out.println("Entrando no metodo listAllCars");
-        var allCars = repository.findAll();
-        System.out.println("Listagem de carros concluida. Total de carros: " + allCars.size());
-        return ResponseEntity.ok(allCars);
-
+    public ResponseEntity listAllCarsActives(){
+       var allCars = repository.findAllByActiveTrue();
+       return ResponseEntity.ok(allCars);
     }
 
     @PostMapping
