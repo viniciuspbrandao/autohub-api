@@ -32,11 +32,11 @@ public class CarEntity {
     private boolean active; //todos os novos carros inseridos recebem o status de ativo
 
     public CarEntity(CarDTO dto) {
-        this.marca = dto.marca();
-        this.modelo = dto.modelo();
-        this.ano = dto.ano();
-        this.preco = dto.preco();
-        this.cor = dto.cor();
+        this.marca = dto.getMarca();
+        this.modelo = dto.getModelo();
+        this.ano = dto.getAno();
+        this.preco = dto.getPreco();
+        this.cor = dto.getCor();
         this.active = true;
     }
 

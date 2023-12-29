@@ -40,14 +40,14 @@ public class CarController {
     public ResponseEntity updateCar(@RequestBody @Valid CarDTO carDTO) {
         System.out.println("Recebendo dados do carro: " + carDTO); //log de depuração
         //service
-        Optional<CarEntity> optionalCar = repository.findById(carDTO.id());
+        Optional<CarEntity> optionalCar = repository.findById(carDTO.getId());
         if (optionalCar.isPresent()) {
             CarEntity updatedCar = optionalCar.get(); //ERREI aqui, ao usar o ".findById", precisa do "Optional<>", do ".isPresent()" e do ".get()"
-            updatedCar.setMarca(carDTO.marca());
-            updatedCar.setModelo(carDTO.modelo());
-            updatedCar.setAno(carDTO.ano());
-            updatedCar.setPreco(carDTO.preco());
-            updatedCar.setCor(carDTO.cor());
+            updatedCar.setMarca(carDTO.getMarca());
+            updatedCar.setModelo(carDTO.getModelo());
+            updatedCar.setAno(carDTO.getAno());
+            updatedCar.setPreco(carDTO.getPreco());
+            updatedCar.setCor(carDTO.getCor());
             System.out.println("dados inseridos: " + updatedCar); //log de depuração
             return ResponseEntity.ok().build();
         } else {

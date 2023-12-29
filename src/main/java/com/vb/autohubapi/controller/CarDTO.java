@@ -1,25 +1,62 @@
 package com.vb.autohubapi.controller;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record CarDTO(
+public class CarDTO {
 
-        Long id,
+    private final Long id;
+    private final String marca;
+    private final String modelo;
+    private final int ano;
+    private final float preco;
+    private final String cor;
 
-        @NotBlank
-        String marca,
+    public CarDTO(
+            Long id,
+            @NotBlank
+            String marca,
 
-        @NotBlank
-        String modelo,
+            @NotBlank
+            String modelo,
 
-        @NotNull
-        int ano,
+            @NotNull
+            int ano,
 
-        @NotNull
-        float preco,
+            @NotNull
+            float preco,
 
-        @NotBlank
-        String cor
-) {
+            @NotBlank
+            String cor) {
+        this.id = id;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.preco = preco;
+        this.cor = cor;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public float getPreco() {
+        return preco;
+    }
+
+    public String getCor() {
+        return cor;
+    }
 }
