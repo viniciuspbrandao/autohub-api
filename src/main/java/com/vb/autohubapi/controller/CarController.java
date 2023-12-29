@@ -60,10 +60,18 @@ public class CarController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteCar(@PathVariable Long id) {
-        System.out.println("Request de exclusao do carro de Id: " + id); //log de depuração
-        repository.deleteById(id);
-        System.out.println("Carro removido com sucesso. ID: " + id); //log de depuração
-        return ResponseEntity.noContent().build();
-    }
+        System.out.println("Request de inativacao do carro de Id: " + id); //log de depuração
 
+        Optional<CarEntity> optionalCars = repository.findById(id);
+        if (optionalCars.isPresent()) {
+            CarEntity removeCar = optionalCars.get(); //ERREI aqui, ao usar o ".findById", precisa do "Optional<>", do ".isPresent()" e do ".get()"
+            removeCar.setActive(false);
+            System.out.println("Carro inativado com sucesso. ID: " + id); //log de depuração
+
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }
