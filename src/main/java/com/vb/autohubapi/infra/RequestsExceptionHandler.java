@@ -9,7 +9,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class RequestsExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity threat404(){
+    public ResponseEntity threat404() {
         return ResponseEntity.badRequest().body("Dado nao encontrado.");
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity threatRunTimeExpeption() {
+        return ResponseEntity.badRequest().body("Dados invalidos.\n" +
+                "Verifique a regra para inclusao de carros:\n" +
+                "* Ano de fabricacao abaixo de 2015, nao pode ser aceito.");
     }
 }
