@@ -22,7 +22,7 @@ public class CarService {
     @Transactional
     public CarEntity saveCar(CarEntity newCar) {
 
-        if (newCar.getAno() < 2015) {
+        if (newCar != null && newCar.getAno() < 2015) {
             throw new RuntimeException();
         } else {
             System.out.println("ainda é fabricado");
