@@ -37,7 +37,7 @@ public class CarService {
 
 
     @Transactional
-    public CarEntity updateCar(Long id, CarDTO updtCar) {
+    public CarEntity updateCar(Long id, CarEntity updtCar) {
         Optional<CarEntity> optionalCar = repository.findById(id);
 
         if (optionalCar.isPresent()) {
