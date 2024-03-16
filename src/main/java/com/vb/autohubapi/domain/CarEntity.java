@@ -7,7 +7,7 @@ import lombok.*;
 
 
 @Entity(name= "cars")
-@Table(name= "cars")
+@Table(name= "cars_v2")
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -28,6 +28,8 @@ public class CarEntity {
     private float preco;
 
     private String cor;
+    @Column(name = "placa_carro")
+    private String placa;
 
     private boolean active; //todos os novos carros inseridos recebem o status de ativo
 
@@ -37,6 +39,7 @@ public class CarEntity {
         this.ano = dto.getAno();
         this.preco = dto.getPreco();
         this.cor = dto.getCor();
+        this.placa = dto.getPlaca();
         this.active = true;
     }
 
@@ -51,6 +54,7 @@ public class CarEntity {
                 ", ano=" + ano +
                 ", preco=" + preco +
                 ", cor='" + cor + '\'' +
+                ", placa='" + placa + '\'' +
                 '}';
     }
 }

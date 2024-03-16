@@ -12,8 +12,10 @@ public class CarDTO {
     private final float preco;
     private final String cor;
 
+    private final String placa;
     public CarDTO(
             Long id,
+
             @NotBlank
             String marca,
 
@@ -27,13 +29,17 @@ public class CarDTO {
             float preco,
 
             @NotBlank
-            String cor) {
+            String cor,
+
+            @NotBlank
+            String placa) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
         this.preco = preco;
         this.cor = cor;
+        this.placa = placa;
     }
 
     public Long getId() {
@@ -58,5 +64,9 @@ public class CarDTO {
 
     public String getCor() {
         return cor;
+    }
+
+    public String getPlaca() {
+        return placa;
     }
 }

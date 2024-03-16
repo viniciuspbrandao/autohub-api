@@ -1,11 +1,11 @@
 package com.vb.autohubapi.service;
 
-import com.vb.autohubapi.controller.CarDTO;
 import com.vb.autohubapi.domain.CarEntity;
 import com.vb.autohubapi.repository.CarRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,15 +21,13 @@ public class CarService {
 
     @Transactional
     public CarEntity saveCar(CarEntity newCar) {
-
-        if (newCar != null && newCar.getAno() < 2015) {
-            throw new RuntimeException();
-        } else {
-            System.out.println("ainda é fabricado");
-        }
+        checkFabricationYear(newCar);
+        checkDuplicationCar(newCar);
         return repository.save(newCar);
     }
 
+
+    //aplicar validacao de placa para utilizar nos testes
 
     public List<CarEntity> getAllActiveTrue() {
         return repository.findAllByActiveTrue();
@@ -37,7 +35,7 @@ public class CarService {
 
 
     @Transactional
-    public CarEntity updateCar(Long id, CarEntity updtCar) {
+    public CarEntity updateCar(Long id, CarEntity updtCar) { //aplicar a validacao de placa duplicada
         Optional<CarEntity> optionalCar = repository.findById(id);
 
         if (optionalCar.isPresent()) {
@@ -47,8 +45,10 @@ public class CarService {
             existingCar.setAno(updtCar.getAno());
             existingCar.setPreco(updtCar.getPreco());
             existingCar.setCor(updtCar.getCor());
+            existingCar.setPlaca(updtCar.getPlaca());
+            existingCar.setActive(true);
 
-            System.out.println("dados inseridos"); //log de depuração
+            System.out.println("dados atualizados");
             repository.save(existingCar);
 
             return existingCar;
@@ -84,4 +84,22 @@ public class CarService {
         }
     }
 
+    private void checkFabricationYear(CarEntity newCar) {
+        if (newCar != null && newCar.getAno() < 2015) {
+            throw new RuntimeException();
+        } else {
+            System.out.println("Este veícula ainda é fabricado");
+        }
+    }
+
+    private void checkDuplicationCar(CarEntity dto) {
+        String placaNewCar = dto.getPlaca();
+        Optional<CarEntity> optionalPlaca = repository.findByPlaca(dto.getPlaca());
+
+        if (optionalPlaca.isPresent()) {
+            throw new DataIntegrityViolationException(placaNewCar);
+        } else {
+            System.out.println("Este é um novo carro. Nao consta no banco de dados.");
+        }
+    }
 }

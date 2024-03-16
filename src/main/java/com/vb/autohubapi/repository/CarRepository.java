@@ -3,10 +3,12 @@ import com.vb.autohubapi.domain.CarEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface CarRepository extends JpaRepository<CarEntity, Long> {
     List<CarEntity> findAllByActiveTrue();
+    Optional<CarEntity> findByPlaca(String placa);
     /*
      * find
      * All
