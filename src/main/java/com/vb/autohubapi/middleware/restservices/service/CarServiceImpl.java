@@ -1,7 +1,7 @@
-package com.vb.autohubapi.service;
+package com.vb.autohubapi.middleware.restservices.service;
 
-import com.vb.autohubapi.domain.CarEntity;
-import com.vb.autohubapi.repository.CarRepository;
+import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
+import com.vb.autohubapi.middleware.restservices.postgresql.CarRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 @Service
-public class CarService {
+public class CarServiceImpl implements ICarService {
 
     @Autowired
     CarRepository repository;

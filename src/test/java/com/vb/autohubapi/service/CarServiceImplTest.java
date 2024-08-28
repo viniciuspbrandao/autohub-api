@@ -1,8 +1,8 @@
 package com.vb.autohubapi.service;
 
-import com.vb.autohubapi.domain.CarEntity;
-import com.vb.autohubapi.repository.CarRepository;
-import org.junit.jupiter.api.AfterEach;
+import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
+import com.vb.autohubapi.middleware.restservices.postgresql.CarRepository;
+import com.vb.autohubapi.middleware.restservices.service.CarServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class CarServiceTest {
+class CarServiceImplTest {
 
     /*Passos para criar um teste:
     * Arrange;
@@ -28,7 +28,7 @@ class CarServiceTest {
     private CarRepository mockCarRepository;
 
     @InjectMocks // p/ indicar que os mocks criados com @Mock devem ser injetados na instância dessa classe.
-    private CarService mockCarService;
+    private CarServiceImpl mockCarServiceImpl;
 
     @InjectMocks
     private CarEntity mockCarEntity;
@@ -50,8 +50,8 @@ class CarServiceTest {
         when(mockCarRepository.save(Mockito.any(CarEntity.class))).thenReturn(mockCarEntity);
 
         // Executando o método do serviço que será testado
-        // Chama o método saveCar do mockCarService passando o mockCarEntity e recebe o resultado em savedCar
-        CarEntity savedCar = mockCarService.saveCar(mockCarEntity);
+        // Chama o método saveCar do mockCarServiceImpl passando o mockCarEntity e recebe o resultado em savedCar
+        CarEntity savedCar = mockCarServiceImpl.saveCar(mockCarEntity);
 
         // Verificando se o método save do mockCarRepository foi chamado exatamente uma vez
         // Garante que o método save do mockCarRepository foi chamado uma vez com qualquer instância de CarEntity
@@ -59,7 +59,7 @@ class CarServiceTest {
 
         assertNotNull(savedCar);//certifica que a resposta não é um null
         // Verificando se o método saveCar do serviço retorna a entidade carro mockada
-        // Garante que o resultado retornado pelo método saveCar do mockCarService é o mesmo mockCarEntity
+        // Garante que o resultado retornado pelo método saveCar do mockCarServiceImpl é o mesmo mockCarEntity
         assertSame(mockCarEntity, savedCar);
     }
 
@@ -71,7 +71,7 @@ class CarServiceTest {
 
         try {
             mockCarEntity.setAno(1995); //input de valor que gera excecao para o teste
-            CarEntity savedCar = mockCarService.saveCar(mockCarEntity);
+            CarEntity savedCar = mockCarServiceImpl.saveCar(mockCarEntity);
         } catch (RuntimeException runtimeException){
             assertEquals(RuntimeException.class, runtimeException.getClass());
         }

@@ -1,7 +1,7 @@
-package com.vb.autohubapi.domain;
+package com.vb.autohubapi.middleware.restservices.domain;
 
 
-import com.vb.autohubapi.controller.CarDTO;
+import com.vb.autohubapi.middleware.restservices.controller.CarDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,7 +28,7 @@ public class CarEntity {
     private float preco;
 
     private String cor;
-    @Column(name = "placa_carro")
+    @Column(name = "PLACA_CARRO")
     private String placa;
 
     private boolean active; //todos os novos carros inseridos recebem o status de ativo

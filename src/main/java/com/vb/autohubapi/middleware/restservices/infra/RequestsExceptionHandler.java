@@ -1,4 +1,4 @@
-package com.vb.autohubapi.infra;
+package com.vb.autohubapi.middleware.restservices.infra;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;

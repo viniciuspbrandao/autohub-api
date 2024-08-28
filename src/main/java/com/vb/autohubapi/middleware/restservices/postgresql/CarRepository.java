@@ -1,6 +1,8 @@
-package com.vb.autohubapi.repository;
-import com.vb.autohubapi.domain.CarEntity;
+package com.vb.autohubapi.middleware.restservices.postgresql;
+import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +10,10 @@ import java.util.Optional;
 
 public interface CarRepository extends JpaRepository<CarEntity, Long> {
     List<CarEntity> findAllByActiveTrue();
-    Optional<CarEntity> findByPlaca(String placa);
+
+    @Query(value = "FROM CARS_v2 cars "+
+                    "WHERE cars.placa =: placa")
+    Optional<CarEntity> findByPlaca(@Param("placa") String placa);
     /*
      * find
      * All
