@@ -1,16 +1,19 @@
 package com.vb.autohubapi.middleware.restservices.controller;
 
 import com.vb.autohubapi.middleware.restservices.api.CarApi;
+import com.vb.autohubapi.middleware.restservices.domain.CarCreateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
-import com.vb.autohubapi.middleware.restservices.service.CarServiceImpl;
 import com.vb.autohubapi.middleware.restservices.service.ICarService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -19,7 +22,6 @@ public class CarController implements CarApi {
 
     @Autowired
     private ICarService iService;
-//    private CarServiceImpl service;
 
 
 //    @Operation(summary = "List all active cars")
@@ -31,11 +33,10 @@ public class CarController implements CarApi {
 
     @Operation(summary = "Create a new car")
     @PostMapping
-    public ResponseEntity insertCar(@RequestBody @Valid CarDTO carDTO) throws Exception {
-        System.out.println("Recebendo dados do carro: " + carDTO);
-//      Cria uma nova instância de CarsEntity a partir de carDTO, salva usando o serviço saveCar e armazena a entidade salva em savedCar.
-        CarEntity newCar = iService.saveCar(new CarEntity(carDTO));
-        return ResponseEntity.ok(newCar); //Qd nao tem corpo no retorno precisa do ".ok().build()"
+    @Transactional
+    public ResponseEntity<CarCreateResponseDTO> insertCar(@RequestBody @Valid CarEntity dto) throws Exception {
+        return new ResponseEntity<>(this.iService.saveCar(dto), HttpStatusCode.valueOf(201));
+
     }
 
 //    @Operation(summary = "Update a car")

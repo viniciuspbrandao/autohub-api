@@ -3,6 +3,8 @@ package com.vb.autohubapi.middleware.restservices.controller;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
+
 public class CarDTO {
 
     private final Long id;
@@ -11,6 +13,8 @@ public class CarDTO {
     private final int ano;
     private final float preco;
     private final String cor;
+
+    private final LocalDate data;
 
     private final String placa;
     public CarDTO(
@@ -32,7 +36,11 @@ public class CarDTO {
             String cor,
 
             @NotBlank
-            String placa) {
+            String placa,
+
+            LocalDate data
+            )
+    {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
@@ -40,6 +48,7 @@ public class CarDTO {
         this.preco = preco;
         this.cor = cor;
         this.placa = placa;
+        this.data = data;
     }
 
     public Long getId() {
@@ -68,5 +77,9 @@ public class CarDTO {
 
     public String getPlaca() {
         return placa;
+    }
+
+    public LocalDate getData() {
+        return data;
     }
 }

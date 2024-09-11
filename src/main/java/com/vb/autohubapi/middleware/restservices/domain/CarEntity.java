@@ -5,9 +5,12 @@ import com.vb.autohubapi.middleware.restservices.controller.CarDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 @Entity(name= "cars")
-@Table(name= "cars_v2")
+@Table(name= "cars_v3")
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -17,7 +20,7 @@ public class CarEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; //pq o ID nao pode ser int ??? dá erro na JPA se for int
+    private Long id;
 
     private String marca;
 
@@ -31,7 +34,26 @@ public class CarEntity {
     @Column(name = "PLACA_CARRO")
     private String placa;
 
+    @Column(name = "dt_create")
+    private LocalDate createdDate;
+
+    @Column(name = "dh_update")
+    private LocalDateTime dhUpdate;
+
     private boolean active; //todos os novos carros inseridos recebem o status de ativo
+
+    public CarEntity(CarEntity car) {
+        this.marca = car.marca;
+        this.modelo = car.modelo;
+        this.ano = car.ano;
+        this.preco = car.preco;
+        this.cor = car.cor;
+        this.placa = car.placa;
+        this.active = true;
+        this.createdDate = car.createdDate;
+        this.dhUpdate = car.dhUpdate;
+    }
+
 
     public CarEntity(CarDTO dto) {
         this.marca = dto.getMarca();
@@ -40,6 +62,12 @@ public class CarEntity {
         this.preco = dto.getPreco();
         this.cor = dto.getCor();
         this.placa = dto.getPlaca();
+        this.active = true;
+    }
+
+    public CarEntity(CarCreateResponseDTO dto) {
+        this.placa = dto.getPlaca();
+        this.createdDate = dto.getCreatedDate();
         this.active = true;
     }
 
@@ -55,6 +83,7 @@ public class CarEntity {
                 ", preco=" + preco +
                 ", cor='" + cor + '\'' +
                 ", placa='" + placa + '\'' +
+                ", data de criacao='" + createdDate + '\'' +
                 '}';
     }
 }

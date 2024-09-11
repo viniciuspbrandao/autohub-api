@@ -1,8 +1,8 @@
 package com.vb.autohubapi.middleware.restservices.api;
 
 
-import com.vb.autohubapi.middleware.restservices.controller.CarDTO;
-
+import com.vb.autohubapi.middleware.restservices.domain.CarCreateResponseDTO;
+import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ public interface CarApi {
 
     @Operation(summary = "Create a new car")
     @PostMapping
-    public ResponseEntity<CarDTO> insertCar(@RequestBody @Valid CarDTO carDTO) throws Exception;
+    public ResponseEntity<CarCreateResponseDTO> insertCar(@RequestBody @Valid CarEntity carDTO) throws Exception;
 
 
 }
