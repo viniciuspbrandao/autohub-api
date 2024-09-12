@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static com.vb.autohubapi.middleware.restservices.util.ConstantesUtil.LIMIT_YEAR;
@@ -32,24 +33,23 @@ public class CarServiceImpl implements ICarService {
     public CarCreateResponseDTO saveCar(CarEntity newCar) throws Exception {
 
         CarEntity carEntity = createCarEntity(newCar);
+        return carUtil.buildCreateCarCreateResponseObject(carEntity);
 
-//        CarCreateResponseDTO responseDTO = carUtil.buildCreateCarCreateResponseObject(carEntity);
-
-        return carUtil.buildCreateCarCreateResponseObject(carEntity);// carEntity. repository.save(newCar);
     }
 
-    private CarEntity persistCarDates(CarEntity newCar) {
+//    private CarEntity persistCarDates(CarEntity newCar) {
+//
+//        CarEntity dates = new CarEntity(newCar);
+//        newCar.setCreatedDate(LocalDate.now());
+//        dates.setDhUpdate(LocalDateTime.now());
+//
+//        return repository.save(dates);
+//
+//    }
 
-        CarEntity dates = new CarEntity(newCar);
-
-        newCar.setCreatedDate(LocalDate.now());
-        dates.setDhUpdate(LocalDateTime.now());
-
-        return repository.save(dates);
-    }
-
-    //o valor do carro no cadastro é o preco q foi comprado
-    //acrescentar uma margem de lucro variavel de acordo com o ano do carro.
+    // TODO: 9/12/2024
+    //  O valor do carro no cadastro é o preco q foi comprado pela agencia
+    //  Acrescentar uma margem de lucro variavel de acordo com ano, marca e preco do carro.
 
     private CarEntity createCarEntity(CarEntity carDTO) throws Exception {
 
@@ -57,7 +57,7 @@ public class CarServiceImpl implements ICarService {
             log.info("creating a new car");
 
             checkIfCarExistInDB(carDTO);
-            checkFabricationYear(carDTO);
+            checkCarAgeForSalesPotential(carDTO);
 
             CarEntity carEntity = new CarEntity(carDTO);
 
@@ -73,24 +73,24 @@ public class CarServiceImpl implements ICarService {
         }
     }
 
-    @Transactional
-    public CarEntity createNewCarObject() throws Exception{
-        log.info("criando objeto CarEntity");
+//    @Transactional
+//    public CarEntity createNewCarObject() throws Exception{
+//        log.info("criando objeto CarEntity");
+//
+//        CarEntity carEntity = new CarEntity();
+//        carEntity.setCreatedDate(LocalDate.now());
+//
+//        return carEntity;
+//    }
 
-        CarEntity carEntity = new CarEntity();
-        carEntity.setCreatedDate(LocalDate.now());
 
-        return carEntity;
+
+
+    public List<CarEntity> getAllCarsActiveTrue() {
+        return repository.findAllByActiveTrue();
     }
 
 
-    //aplicar validacao de placa para utilizar nos testes
-
-//    public List<CarEntity> getAllActiveTrue() {
-//        return repository.findAllByActiveTrue();
-//    }
-//
-//
 //    @Transactional
 //    public CarEntity updateCar(Long id, CarEntity updtCar) { //aplicar a validacao de placa duplicada
 //        Optional<CarEntity> optionalCar = repository.findById(id);
@@ -113,8 +113,8 @@ public class CarServiceImpl implements ICarService {
 //            throw new EntityNotFoundException("Carro não encontrado com o ID: " + id);
 //        }
 //    }
-//
-//
+
+
 //    @Transactional
 //    public CarEntity disableCarById(Long id) {
 //
@@ -141,11 +141,11 @@ public class CarServiceImpl implements ICarService {
 //        }
 //    }
 
-    private void checkFabricationYear(CarEntity newCar) throws RequestsExceptionHandler {
+    private void checkCarAgeForSalesPotential(CarEntity newCar) throws RequestsExceptionHandler {
         if (newCar != null && newCar.getAno() < LIMIT_YEAR) {
             throw new RequestsExceptionHandler();
         } else {
-            System.out.println("Este veícula ainda é fabricado");
+            System.out.println("The car is relatively new and has good sales potential based on its age.");
         }
     }
 

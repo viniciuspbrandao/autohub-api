@@ -13,10 +13,14 @@ public class CarDTO {
     private final int ano;
     private final float preco;
     private final String cor;
-
     private final LocalDate data;
-
     private final String placa;
+    private final int quilometragem;
+    private final String combustivel;
+    private final String transmissao;
+    private final int nPortas;
+
+
     public CarDTO(
             Long id,
 
@@ -38,7 +42,19 @@ public class CarDTO {
             @NotBlank
             String placa,
 
-            LocalDate data
+            LocalDate data,
+
+            @NotNull
+            int quilometragem,
+
+            @NotNull
+            String combustivel,
+
+            @NotNull
+            String transmissao,
+
+            @NotNull
+            int nPortas
             )
     {
         this.id = id;
@@ -49,6 +65,10 @@ public class CarDTO {
         this.cor = cor;
         this.placa = placa;
         this.data = data;
+        this.quilometragem = quilometragem;
+        this.combustivel = combustivel;
+        this.transmissao = transmissao;
+        this.nPortas = nPortas;
     }
 
     public Long getId() {
@@ -81,5 +101,16 @@ public class CarDTO {
 
     public LocalDate getData() {
         return data;
+    }
+
+    public int getQuilometragem() {
+        return quilometragem;
+    }
+    public String getCombustivel() {
+        return combustivel;
+    }public String getTransmissao() {
+        return transmissao;
+    }public int getNPortas() {
+        return nPortas;
     }
 }

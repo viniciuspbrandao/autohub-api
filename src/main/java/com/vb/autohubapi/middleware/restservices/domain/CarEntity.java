@@ -40,7 +40,20 @@ public class CarEntity {
     @Column(name = "dh_update")
     private LocalDateTime dhUpdate;
 
-    private boolean active; //todos os novos carros inseridos recebem o status de ativo
+    private boolean active;
+
+    @Column(name = "mileage")
+    private int quilometragem;
+
+    @Column(name = "tipo_combustivel")
+    private String combustivel;
+
+    @Column(name = "transmissao")
+    private String transmissao;
+
+    @Column(name = "numero_portas")
+    private int nPortas;
+
 
     public CarEntity(CarEntity car) {
         this.marca = car.marca;
@@ -52,6 +65,10 @@ public class CarEntity {
         this.active = true;
         this.createdDate = car.createdDate;
         this.dhUpdate = car.dhUpdate;
+        this.quilometragem = car.quilometragem;
+        this.combustivel = car.combustivel;
+        this.transmissao = car.transmissao;
+        this.nPortas = car.nPortas;
     }
 
 
@@ -63,6 +80,10 @@ public class CarEntity {
         this.cor = dto.getCor();
         this.placa = dto.getPlaca();
         this.active = true;
+        this.quilometragem = dto.getQuilometragem();
+        this.combustivel = dto.getCombustivel();
+        this.transmissao = dto.getTransmissao();
+        this.nPortas = dto.getNPortas();
     }
 
     public CarEntity(CarCreateResponseDTO dto) {
