@@ -1,7 +1,6 @@
 package com.vb.autohubapi.middleware.restservices.domain;
 
 
-import com.vb.autohubapi.middleware.restservices.controller.CarDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,11 +30,12 @@ public class CarEntity {
     private float preco;
 
     private String cor;
-    @Column(name = "PLACA_CARRO")
+
+    @Column(name = "placa_carro", unique = true)
     private String placa;
 
-    @Column(name = "dt_create")
-    private LocalDate createdDate;
+    @Column(name = "dh_create")
+    private LocalDateTime createdDate;
 
     @Column(name = "dh_update")
     private LocalDateTime dhUpdate;
@@ -52,7 +52,7 @@ public class CarEntity {
     private String transmissao;
 
     @Column(name = "numero_portas")
-    private int nPortas;
+    private int numPortas;
 
 
     public CarEntity(CarEntity car) {
@@ -68,7 +68,7 @@ public class CarEntity {
         this.quilometragem = car.quilometragem;
         this.combustivel = car.combustivel;
         this.transmissao = car.transmissao;
-        this.nPortas = car.nPortas;
+        this.numPortas = car.numPortas;
     }
 
 
@@ -83,7 +83,7 @@ public class CarEntity {
         this.quilometragem = dto.getQuilometragem();
         this.combustivel = dto.getCombustivel();
         this.transmissao = dto.getTransmissao();
-        this.nPortas = dto.getNPortas();
+        this.numPortas = dto.getNumPortas();
     }
 
     public CarEntity(CarCreateResponseDTO dto) {
@@ -105,6 +105,7 @@ public class CarEntity {
                 ", cor='" + cor + '\'' +
                 ", placa='" + placa + '\'' +
                 ", data de criacao='" + createdDate + '\'' +
+                ", numero de portas='" + numPortas + '\'' +
                 '}';
     }
 }

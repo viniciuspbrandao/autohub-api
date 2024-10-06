@@ -17,7 +17,7 @@ public class RequestsExceptionHandler extends Throwable {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity threatRunTimeExpeption() {
         return ResponseEntity.badRequest().body("Dados invalidos.\n" +
-                "Verifique a regra para inclusao de carros:\n" +
+                "Carro nulo ou nao esta de acordo com a regra abaixo: \n" +
                 "* Se o carro foi fabricado antes do ano 2015, nao pode ser aceito.");
     }
 

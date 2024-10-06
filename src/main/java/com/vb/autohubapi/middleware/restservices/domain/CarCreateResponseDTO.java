@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class CarCreateResponseDTO {
     private Long carId;
 
     @JsonProperty("createdDate")
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
 
     @JsonProperty("placa")
     private String placa;

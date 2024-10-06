@@ -4,7 +4,7 @@ import com.vb.autohubapi.middleware.restservices.domain.CarCreateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 public class CarUtil {
@@ -13,7 +13,7 @@ public class CarUtil {
         CarCreateResponseDTO createResponseDTO = new CarCreateResponseDTO();
         createResponseDTO.setCarId(carEntity.getId());
         createResponseDTO.setPlaca(carEntity.getPlaca());
-        createResponseDTO.setCreatedDate(LocalDate.now());
+        createResponseDTO.setCreatedDate(LocalDateTime.now());
 
         return createResponseDTO;
     }

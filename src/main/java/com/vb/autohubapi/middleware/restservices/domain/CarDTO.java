@@ -1,4 +1,4 @@
-package com.vb.autohubapi.middleware.restservices.controller;
+package com.vb.autohubapi.middleware.restservices.domain;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ public class CarDTO {
     private final int quilometragem;
     private final String combustivel;
     private final String transmissao;
-    private final int nPortas;
+    private final int numPortas;
 
 
     public CarDTO(
@@ -54,7 +54,7 @@ public class CarDTO {
             String transmissao,
 
             @NotNull
-            int nPortas
+            int numPortas
             )
     {
         this.id = id;
@@ -68,7 +68,7 @@ public class CarDTO {
         this.quilometragem = quilometragem;
         this.combustivel = combustivel;
         this.transmissao = transmissao;
-        this.nPortas = nPortas;
+        this.numPortas = numPortas;
     }
 
     public Long getId() {
@@ -106,11 +106,16 @@ public class CarDTO {
     public int getQuilometragem() {
         return quilometragem;
     }
+
     public String getCombustivel() {
         return combustivel;
-    }public String getTransmissao() {
+    }
+
+    public String getTransmissao() {
         return transmissao;
-    }public int getNPortas() {
-        return nPortas;
+    }
+
+    public int getNumPortas() {
+        return numPortas;
     }
 }

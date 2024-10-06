@@ -61,7 +61,7 @@ public class CarServiceImpl implements ICarService {
 
             CarEntity carEntity = new CarEntity(carDTO);
 
-            carEntity.setCreatedDate(LocalDate.now());
+            carEntity.setCreatedDate(LocalDateTime.now());
             carEntity.setDhUpdate(LocalDateTime.now());
 
             repository.save(carEntity);
@@ -142,7 +142,8 @@ public class CarServiceImpl implements ICarService {
 //    }
 
     private void checkCarAgeForSalesPotential(CarEntity newCar) throws RequestsExceptionHandler {
-        if (newCar != null && newCar.getAno() < LIMIT_YEAR) {
+        if (newCar == null || newCar.getAno() < LIMIT_YEAR) {
+            log.error("Carro inválido: " + newCar);
             throw new RequestsExceptionHandler();
         } else {
             System.out.println("The car is relatively new and has good sales potential based on its age.");
@@ -150,12 +151,15 @@ public class CarServiceImpl implements ICarService {
     }
 
     private void checkIfCarExistInDB(CarEntity dto) throws RequestsExceptionHandler {
-        String placaNewCar = dto.getPlaca();
+
+        String placaNewCar = dto.getPlaca().trim();
         Optional<CarEntity> optionalPlaca = repository.findByPlaca(placaNewCar);
 
         if (optionalPlaca.isPresent()) {
+            log.info("Carro encontrado");
             throw new DataIntegrityViolationException(placaNewCar);
         } else {
+            log.info("Carro não encontrado");
             System.out.println("Este é um novo carro. Nao consta no banco de dados.");
         }
     }
