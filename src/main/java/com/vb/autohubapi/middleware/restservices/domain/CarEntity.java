@@ -27,6 +27,7 @@ public class CarEntity {
 
     private int ano;
 
+    @Column(name = "preco_aquisicao")
     private float preco;
 
     private String cor;
