@@ -46,5 +46,15 @@ public class CarController implements CarApi {
         return new ResponseEntity<>(this.iService.updateCar(id, carDTO), HttpStatusCode.valueOf(200));
     }
 
-
+    @Operation(summary = "Get car by id")
+    @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Found the car"),
+    @ApiResponse(responseCode = "201", description = "Car created"),
+    @ApiResponse(responseCode = "400", description = "Invalid id supplied"),
+    @ApiResponse(responseCode = "404", description = "Car not found")})
+    @GetMapping("/{id}")
+    public ResponseEntity getCarById(@PathVariable Long id) {
+        CarEntity carEntity = iService.getCarById(id);
+        return ResponseEntity.ok(carEntity);
+    }
 }

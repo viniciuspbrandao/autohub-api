@@ -132,4 +132,9 @@ public class CarServiceImpl implements ICarService {
             throw new RuntimeException(String.valueOf(dto));
         }
     }
+
+    public CarEntity getCarById(Long id){
+        log.info("Initiating search for vehicle with ID: {}", id);
+        return repository.findById(id).orElseThrow(()-> new RuntimeException("Vehicle not found with ID: " + id));
+    }
 }

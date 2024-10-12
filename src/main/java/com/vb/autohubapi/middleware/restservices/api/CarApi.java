@@ -26,4 +26,7 @@ public interface CarApi {
     @PutMapping
     public ResponseEntity<CarUpdateResponseDTO> updateCar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid CarEntity carDTO);
 
+    @Operation(summary = "Get car by Id")
+    @GetMapping
+    public ResponseEntity<CarEntity> getCarById(@PathVariable @NotNull @Positive Long id);
 }
