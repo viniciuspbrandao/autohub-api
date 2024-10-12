@@ -1,6 +1,5 @@
 package com.vb.autohubapi.middleware.restservices.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,17 +12,14 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CarCreateResponseDTO {
-
-    private static final long serialVersionUID = 1L;
+public class CarUpdateResponseDTO {
 
     @JsonProperty("carId")
     private Long carId;
 
-    @JsonProperty("createdDate")
-    private LocalDateTime createdDate;
+    @JsonProperty("dh_update")
+    private LocalDateTime dhUpdate;
 
     @JsonProperty("placa")
     private String placa;
-
 }

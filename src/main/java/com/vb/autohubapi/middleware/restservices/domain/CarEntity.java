@@ -3,9 +3,11 @@ package com.vb.autohubapi.middleware.restservices.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import static com.vb.autohubapi.middleware.restservices.util.ConstantesUtil.STATUS_ACTIVE;
 
 
 @Entity(name= "cars")
@@ -15,21 +17,26 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
+//@SQLDelete(sql = "UPDATE CarEntity SET status = 0 WHERE id = ?")
 public class CarEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "marca")
     private String marca;
 
+    @Column(name = "modelo")
     private String modelo;
 
+    @Column(name = "ano")
     private int ano;
 
     @Column(name = "preco_aquisicao")
     private float preco;
 
+    @Column(name = "cor")
     private String cor;
 
     @Column(name = "placa_carro", unique = true)
@@ -41,6 +48,7 @@ public class CarEntity {
     @Column(name = "dh_update")
     private LocalDateTime dhUpdate;
 
+    @Column(name = "status")
     private boolean active;
 
     @Column(name = "mileage")
@@ -63,7 +71,7 @@ public class CarEntity {
         this.preco = car.preco;
         this.cor = car.cor;
         this.placa = car.placa;
-        this.active = true;
+        this.active = STATUS_ACTIVE;
         this.createdDate = car.createdDate;
         this.dhUpdate = car.dhUpdate;
         this.quilometragem = car.quilometragem;
@@ -80,7 +88,7 @@ public class CarEntity {
         this.preco = dto.getPreco();
         this.cor = dto.getCor();
         this.placa = dto.getPlaca();
-        this.active = true;
+        this.active = STATUS_ACTIVE;
         this.quilometragem = dto.getQuilometragem();
         this.combustivel = dto.getCombustivel();
         this.transmissao = dto.getTransmissao();
@@ -90,7 +98,7 @@ public class CarEntity {
     public CarEntity(CarCreateResponseDTO dto) {
         this.placa = dto.getPlaca();
         this.createdDate = dto.getCreatedDate();
-        this.active = true;
+        this.active = STATUS_ACTIVE;
     }
 
 
