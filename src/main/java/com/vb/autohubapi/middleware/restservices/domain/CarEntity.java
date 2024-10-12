@@ -17,7 +17,7 @@ import static com.vb.autohubapi.middleware.restservices.util.ConstantesUtil.STAT
 @EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
-//@SQLDelete(sql = "UPDATE CarEntity SET status = 0 WHERE id = ?")
+@SQLDelete(sql = "UPDATE cars_v3 SET status = 0 WHERE id = ?")
 public class CarEntity {
 
     @Id
