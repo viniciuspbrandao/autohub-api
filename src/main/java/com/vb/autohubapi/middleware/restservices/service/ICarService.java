@@ -17,4 +17,6 @@ public interface ICarService {
     CarUpdateResponseDTO updateCar(Long id, CarEntity updtCar);
 
     CarEntity getCarById(Long id);
+
+    ResponseEntity disableCarById(Long id);
 }

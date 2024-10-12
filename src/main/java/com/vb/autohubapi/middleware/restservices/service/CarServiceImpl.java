@@ -137,4 +137,14 @@ public class CarServiceImpl implements ICarService {
         log.info("Initiating search for vehicle with ID: {}", id);
         return repository.findById(id).orElseThrow(()-> new RuntimeException("Vehicle not found with ID: " + id));
     }
+
+    public ResponseEntity<Void> disableCarById(Long id){
+
+        return repository.findById(id)
+                .map(recordFound -> {
+                    repository.deleteById(id);
+                    return ResponseEntity.noContent().<Void>build();
+                })
+                .orElseThrow();
+    }
 }

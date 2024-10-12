@@ -29,4 +29,8 @@ public interface CarApi {
     @Operation(summary = "Get car by Id")
     @GetMapping
     public ResponseEntity<CarEntity> getCarById(@PathVariable @NotNull @Positive Long id);
+
+    @Operation(summary = "Disable Car")
+    @DeleteMapping
+    public ResponseEntity disableCarById(@PathVariable @NotNull @Positive Long id);
 }

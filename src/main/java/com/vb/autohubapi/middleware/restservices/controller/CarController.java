@@ -57,4 +57,10 @@ public class CarController implements CarApi {
         CarEntity carEntity = iService.getCarById(id);
         return ResponseEntity.ok(carEntity);
     }
+
+    @Operation(summary = "Deactivate/Delete a car")
+    @DeleteMapping("/{id}")
+    public ResponseEntity disableCarById(@PathVariable Long id) {
+        return new ResponseEntity<>(this.iService.disableCarById(id), HttpStatusCode.valueOf(204));
+    }
 }
