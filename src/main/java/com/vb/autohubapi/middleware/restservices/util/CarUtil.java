@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Component
 public class CarUtil {
     public CarCreateResponseDTO buildCreateCarCreateResponseObject(CarEntity carEntity) {
-
+        log.info("Creating a CarCreateResponseObject: {}", carEntity.getId());
         CarCreateResponseDTO createResponseDTO = new CarCreateResponseDTO();
         createResponseDTO.setCarId(carEntity.getId());
         createResponseDTO.setPlaca(carEntity.getPlaca());
@@ -23,7 +23,7 @@ public class CarUtil {
 
     public CarUpdateResponseDTO buildCarUpdateResponseDTO(CarEntity car){
 
-        log.info("Inicio metodo buildCarUpdateResponseDTO: {}", car.getId());
+        log.info("Starting method buildCarUpdateResponseDTO: {}", car.getId());
         CarUpdateResponseDTO updateResponseDTO = new CarUpdateResponseDTO();
 
         updateResponseDTO.setCarId(car.getId());
