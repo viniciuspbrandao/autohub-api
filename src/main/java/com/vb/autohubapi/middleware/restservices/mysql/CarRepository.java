@@ -1,4 +1,4 @@
-package com.vb.autohubapi.middleware.restservices.postgresql;
+package com.vb.autohubapi.middleware.restservices.mysql;
 
 import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

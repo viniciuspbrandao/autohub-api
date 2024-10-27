@@ -2,7 +2,7 @@ package com.vb.autohubapi.service;
 
 import com.vb.autohubapi.middleware.restservices.domain.CarCreateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
-import com.vb.autohubapi.middleware.restservices.postgresql.CarRepository;
+import com.vb.autohubapi.middleware.restservices.mysql.CarRepository;
 import com.vb.autohubapi.middleware.restservices.service.CarServiceImpl;
 import com.vb.autohubapi.middleware.restservices.util.CarUtil;
 import org.junit.jupiter.api.BeforeEach;

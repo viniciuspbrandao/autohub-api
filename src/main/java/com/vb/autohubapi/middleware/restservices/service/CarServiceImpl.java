@@ -4,7 +4,7 @@ import com.vb.autohubapi.middleware.restservices.domain.CarCreateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
 import com.vb.autohubapi.middleware.restservices.domain.CarUpdateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.infra.RequestsExceptionHandler;
-import com.vb.autohubapi.middleware.restservices.postgresql.CarRepository;
+import com.vb.autohubapi.middleware.restservices.mysql.CarRepository;
 import com.vb.autohubapi.middleware.restservices.util.CarUtil;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
