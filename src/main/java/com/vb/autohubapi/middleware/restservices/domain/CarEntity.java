@@ -11,13 +11,13 @@ import static com.vb.autohubapi.middleware.restservices.util.ConstantesUtil.STAT
 
 
 @Entity(name= "cars")
-@Table(name= "cars_v3")
+@Table(name= "tb_cars_v3")
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE cars_v3 SET status = 0 WHERE id = ?")
+@SQLDelete(sql = "UPDATE tb_cars_v3 SET status = 0 WHERE id = ?")
 public class CarEntity {
 
     @Id
