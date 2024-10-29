@@ -88,9 +88,9 @@ public class CarServiceImpl implements ICarService {
         log.info("Car found: {}", uptCar);
 
         uptCar.setId(carDTO.getId());
-        uptCar.setMarca(carDTO.getMarca());
-        uptCar.setModelo(carDTO.getModelo());
-        uptCar.setAno(carDTO.getAno());
+        uptCar.setBrand(carDTO.getBrand());
+        uptCar.setModel(carDTO.getModel());
+        uptCar.setYear(carDTO.getYear());
         uptCar.setPreco(carDTO.getPreco());
         uptCar.setCor(carDTO.getCor());
         uptCar.setPlaca(carDTO.getPlaca());
@@ -106,7 +106,7 @@ public class CarServiceImpl implements ICarService {
     }
 
     private void checkCarAgeForSalesPotential(CarEntity newCar) throws RequestsExceptionHandler {
-        if (newCar == null || newCar.getAno() < LIMIT_YEAR) {
+        if (newCar == null || newCar.getYear() < LIMIT_YEAR) {
             log.error("Invalid car: " + newCar);
             throw new RequestsExceptionHandler();
         } else {

@@ -24,14 +24,14 @@ public class CarEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "marca")
-    private String marca;
+    @Column(name = "brand")
+    private String brand;
 
-    @Column(name = "modelo")
-    private String modelo;
+    @Column(name = "model")
+    private String model;
 
-    @Column(name = "ano")
-    private int ano;
+    @Column(name = "year")
+    private int year;
 
     @Column(name = "preco_aquisicao")
     private float preco;
@@ -65,9 +65,9 @@ public class CarEntity {
 
 
     public CarEntity(CarEntity car) {
-        this.marca = car.marca;
-        this.modelo = car.modelo;
-        this.ano = car.ano;
+        this.brand = car.brand;
+        this.model = car.model;
+        this.year = car.year;
         this.preco = car.preco;
         this.cor = car.cor;
         this.placa = car.placa;
@@ -82,9 +82,9 @@ public class CarEntity {
 
 
     public CarEntity(CarDTO dto) {
-        this.marca = dto.getMarca();
-        this.modelo = dto.getModelo();
-        this.ano = dto.getAno();
+        this.brand = dto.getBrand();
+        this.model = dto.getModel();
+        this.year = dto.getYear();
         this.preco = dto.getPreco();
         this.cor = dto.getCor();
         this.placa = dto.getPlaca();
@@ -107,9 +107,9 @@ public class CarEntity {
     public String toString() {
         return "CarEntity{" +
                 "id=" + id +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", ano=" + ano +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", year=" + year +
                 ", preco=" + preco +
                 ", cor='" + cor + '\'' +
                 ", placa='" + placa + '\'' +

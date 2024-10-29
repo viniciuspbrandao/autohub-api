@@ -8,9 +8,9 @@ import java.time.LocalDate;
 public class CarDTO {
 
     private final Long id;
-    private final String marca;
-    private final String modelo;
-    private final int ano;
+    private final String brand;
+    private final String model;
+    private final int year;
     private final float preco;
     private final String cor;
     private final LocalDate data;
@@ -25,13 +25,13 @@ public class CarDTO {
             Long id,
 
             @NotBlank
-            String marca,
+            String brand,
 
             @NotBlank
-            String modelo,
+            String model,
 
             @NotNull
-            int ano,
+            int year,
 
             @NotNull
             float preco,
@@ -58,9 +58,9 @@ public class CarDTO {
             )
     {
         this.id = id;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.ano = ano;
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
         this.preco = preco;
         this.cor = cor;
         this.placa = placa;
@@ -75,16 +75,16 @@ public class CarDTO {
         return id;
     }
 
-    public String getMarca() {
-        return marca;
+    public String getBrand() {
+        return brand;
     }
 
-    public String getModelo() {
-        return modelo;
+    public String getModel() {
+        return model;
     }
 
-    public int getAno() {
-        return ano;
+    public int getYear() {
+        return year;
     }
 
     public float getPreco() {
