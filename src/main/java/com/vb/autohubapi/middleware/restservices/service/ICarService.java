@@ -1,8 +1,8 @@
 package com.vb.autohubapi.middleware.restservices.service;
 
-import com.vb.autohubapi.middleware.restservices.domain.CarCreateResponseDTO;
-import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
-import com.vb.autohubapi.middleware.restservices.domain.CarUpdateResponseDTO;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarCreateResponseDTO;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarEntity;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarUpdateResponseDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package com.vb.autohubapi.middleware.restservices.controller;
 
 import com.vb.autohubapi.middleware.restservices.api.CarApi;
-import com.vb.autohubapi.middleware.restservices.domain.CarCreateResponseDTO;
-import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarCreateResponseDTO;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarEntity;
 import com.vb.autohubapi.middleware.restservices.service.ICarService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

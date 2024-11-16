@@ -1,6 +1,6 @@
 package com.vb.autohubapi.middleware.restservices.mysql;
 
-import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

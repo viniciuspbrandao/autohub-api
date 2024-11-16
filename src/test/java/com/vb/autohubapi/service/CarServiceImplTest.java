@@ -1,7 +1,7 @@
 package com.vb.autohubapi.service;
 
-import com.vb.autohubapi.middleware.restservices.domain.CarCreateResponseDTO;
-import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarCreateResponseDTO;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarEntity;
 import com.vb.autohubapi.middleware.restservices.mysql.CarRepository;
 import com.vb.autohubapi.middleware.restservices.service.CarServiceImpl;
 import com.vb.autohubapi.middleware.restservices.util.CarUtil;
@@ -87,7 +87,7 @@ class CarServiceImplTest {
         when(mockCarRepository.save(Mockito.any(CarEntity.class))).thenReturn(mockCarEntity);
 
         try {
-            mockCarEntity.setAno(1995); //input de valor que gera excecao para o teste
+            mockCarEntity.setYear(1995); //input de valor que gera excecao para o teste
             CarCreateResponseDTO savedCar = mockServiceImpl.saveCar(mockCarEntity);
         } catch (RuntimeException runtimeException){
             assertEquals(RuntimeException.class, runtimeException.getClass());
@@ -98,9 +98,9 @@ class CarServiceImplTest {
 
     private void startCarEntity(){
         mockCarEntity.setId(1L);
-        mockCarEntity.setMarca("Lamborghini");
-        mockCarEntity.setModelo("Aventador");
-        mockCarEntity.setAno(2030);
+        mockCarEntity.setBrand("Lamborghini");
+        mockCarEntity.setModel("Aventador");
+        mockCarEntity.setYear(2030);
         mockCarEntity.setPreco(450000);
         mockCarEntity.setCor("Bronze");
         mockCarEntity.setPlaca("ABC-1234");

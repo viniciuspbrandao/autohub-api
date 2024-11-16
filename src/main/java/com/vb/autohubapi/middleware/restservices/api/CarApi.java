@@ -1,10 +1,9 @@
 package com.vb.autohubapi.middleware.restservices.api;
 
 
-import com.vb.autohubapi.middleware.restservices.domain.CarCreateResponseDTO;
-import com.vb.autohubapi.middleware.restservices.domain.CarDTO;
-import com.vb.autohubapi.middleware.restservices.domain.CarEntity;
-import com.vb.autohubapi.middleware.restservices.domain.CarUpdateResponseDTO;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarCreateResponseDTO;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarEntity;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarUpdateResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

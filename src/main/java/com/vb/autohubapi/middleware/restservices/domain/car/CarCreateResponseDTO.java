@@ -1,4 +1,4 @@
-package com.vb.autohubapi.middleware.restservices.domain;
+package com.vb.autohubapi.middleware.restservices.domain.car;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
