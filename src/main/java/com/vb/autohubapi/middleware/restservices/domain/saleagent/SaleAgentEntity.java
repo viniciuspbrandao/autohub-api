@@ -4,6 +4,7 @@ import com.vb.autohubapi.middleware.restservices.domain.AgentAccessLevel;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity()
@@ -35,10 +36,10 @@ public class SaleAgentEntity {
     private String password;
 
     @Column(name = "birth_date")
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "hire_date")
-    private LocalDateTime hireDate;
+    private LocalDate hireDate;
 
     @Column(name = "access_level")
     @Enumerated(EnumType.STRING)
