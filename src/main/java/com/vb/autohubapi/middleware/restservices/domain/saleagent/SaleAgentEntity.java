@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity()
-@Table(name= "tb_sales_users_v2")
+@Table(name= "tb_sales_users_v3")
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -58,6 +58,6 @@ public class SaleAgentEntity {
     private LocalDateTime  updatedAt;
 
     @Column(name = "status")
-    private Integer status;
+    private boolean active;
 
 }

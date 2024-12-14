@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Slf4j
@@ -29,6 +30,18 @@ public class SalesAgentServiceImpl implements ISalesAgentService {
         return agentUtil.buildSaleAgentResponse(agent);
     }
 
+    public List<SaleAgentEntity> getAllSaleAgentEntityActiveTrue(){
+        try {
+
+            log.info("Starting method to retrieve all active agents.");
+            var activeAgents = repository.findAllActiveAgents();
+            return activeAgents;
+        } catch (Exception e){
+            log.error("Error retrieving active agents: ", e);
+            throw new RuntimeException("Error retrieving active agents", e);
+        }
+
+    }
 
     private SaleAgentEntity creatingNewAgentSale(SaleAgentEntity saleAgentDTO) throws Exception {
 
@@ -46,8 +59,7 @@ public class SalesAgentServiceImpl implements ISalesAgentService {
             agent.setSalary(saleAgentDTO.getSalary());
             agent.setCommission(saleAgentDTO.getCommission());
             agent.setCreatedAt(LocalDateTime.now());
-    //        agent.setUpdatedAt(LocalDateTime.now());
-            agent.setStatus(1);
+            agent.setActive(true);
 
             repository.save(agent);
 
