@@ -30,11 +30,16 @@ public class SalesAgentController implements SalesAgentApi {
         return new ResponseEntity<>(this.iSalesAgentService.saveNewAgentSale(saleAgent), HttpStatusCode.valueOf(201));
     }
 
-
     @Operation(summary = "List active agents")
     @GetMapping
     public ResponseEntity listActiveAgents(){
         List<SaleAgentEntity> listActiveAgents = iSalesAgentService.getAllSaleAgentEntityActiveTrue();
         return ResponseEntity.ok(listActiveAgents);
+    }
+
+    @Operation(summary = "Deactivate/Delete a AgentById")
+    @DeleteMapping("/{id}")
+    public ResponseEntity disableAgentById(@PathVariable Long id) {
+        return new ResponseEntity<>(this.iSalesAgentService.disableAgentById(id), HttpStatusCode.valueOf(204));
     }
 }

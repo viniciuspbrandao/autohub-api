@@ -7,6 +7,7 @@ import com.vb.autohubapi.middleware.restservices.util.SaleAgentUtil;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -68,6 +69,16 @@ public class SalesAgentServiceImpl implements ISalesAgentService {
             log.error("Error" + e);
             throw new Exception(e);
         }
+    }
+
+    public ResponseEntity<Void> disableAgentById(Long id){
+
+        return repository.findById(id)
+                .map(recordFound -> {
+                    repository.deleteById(id);
+                    return ResponseEntity.noContent().<Void>build();
+                })
+                .orElseThrow();
     }
 
 }

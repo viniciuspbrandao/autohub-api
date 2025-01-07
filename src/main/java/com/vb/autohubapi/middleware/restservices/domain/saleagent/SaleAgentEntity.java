@@ -3,6 +3,7 @@ package com.vb.autohubapi.middleware.restservices.domain.saleagent;
 import com.vb.autohubapi.middleware.restservices.domain.AgentAccessLevel;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE tb_sales_users_v3 SET status = 0 WHERE id = ?")
 public class SaleAgentEntity {
 
     @Id
