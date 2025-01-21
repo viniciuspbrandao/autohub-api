@@ -1,6 +1,7 @@
 package com.vb.autohubapi.middleware.restservices.domain.saleagent;
 
-import com.vb.autohubapi.middleware.restservices.domain.AgentAccessLevel;
+import com.vb.autohubapi.middleware.restservices.domain.enuns.AgentAccessLevel;
+import com.vb.autohubapi.middleware.restservices.domain.enuns.converters.AgentAccessLevelConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -44,7 +45,7 @@ public class SaleAgentEntity {
     private LocalDate hireDate;
 
     @Column(name = "access_level")
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = AgentAccessLevelConverter.class)
     private AgentAccessLevel accessLevel;
 
     @Column(name = "salary")

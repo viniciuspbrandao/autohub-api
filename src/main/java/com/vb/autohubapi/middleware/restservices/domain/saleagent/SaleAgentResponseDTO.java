@@ -1,9 +1,11 @@
 package com.vb.autohubapi.middleware.restservices.domain.saleagent;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.vb.autohubapi.middleware.restservices.domain.AgentAccessLevel;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.vb.autohubapi.middleware.restservices.domain.enuns.AgentAccessLevel;
+import com.vb.autohubapi.middleware.restservices.domain.enuns.converters.AgentAccessLevelConverter;
+
+import jakarta.persistence.Convert;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +35,7 @@ public class SaleAgentResponseDTO {
     private LocalDate hireDate;
 
     @JsonProperty("access_level")
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = AgentAccessLevelConverter.class)
     private AgentAccessLevel accessLevel;
 
 
