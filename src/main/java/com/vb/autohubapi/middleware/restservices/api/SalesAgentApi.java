@@ -20,6 +20,10 @@ public interface SalesAgentApi {
     @GetMapping
     public ResponseEntity<SaleAgentEntity> listActiveAgents();
 
+    @Operation(summary = "Get agent by Id")
+    @GetMapping
+    public ResponseEntity<SaleAgentEntity> getAgentById(@PathVariable @NotNull @Positive Long id);
+
     @Operation(summary = "Disable Agent")
     @DeleteMapping
     public ResponseEntity disableAgentById(@PathVariable @NotNull @Positive Long id);

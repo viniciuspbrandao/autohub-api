@@ -14,4 +14,6 @@ public interface ISalesAgentService {
     List<SaleAgentEntity> getAllSaleAgentEntityActiveTrue();
 
     ResponseEntity disableAgentById(Long id);
+
+    SaleAgentEntity getAgentById(Long id);
 }

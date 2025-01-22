@@ -44,6 +44,11 @@ public class SalesAgentServiceImpl implements ISalesAgentService {
 
     }
 
+    public SaleAgentEntity getAgentById(Long id){
+        log.info("Initiating search for Agent with ID: {}", id);
+        return repository.findById(id).orElseThrow(()-> new RuntimeException("Agent not found with ID: " + id));
+    }
+
     private SaleAgentEntity creatingNewAgentSale(SaleAgentEntity saleAgentDTO) throws Exception {
 
         try {

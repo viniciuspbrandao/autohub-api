@@ -5,6 +5,8 @@ import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentEntit
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentResponseDTO;
 import com.vb.autohubapi.middleware.restservices.service.ISalesAgentService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -35,6 +37,18 @@ public class SalesAgentController implements SalesAgentApi {
     public ResponseEntity listActiveAgents(){
         List<SaleAgentEntity> listActiveAgents = iSalesAgentService.getAllSaleAgentEntityActiveTrue();
         return ResponseEntity.ok(listActiveAgents);
+    }
+
+    @Operation(summary = "Get agent by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the agent"),
+            @ApiResponse(responseCode = "201", description = "agent created"),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied"),
+            @ApiResponse(responseCode = "404", description = "agent not found")})
+    @GetMapping("/{id}")
+    public ResponseEntity getAgentById(@PathVariable Long id) {
+        SaleAgentEntity saleAgent = iSalesAgentService.getAgentById(id);
+        return ResponseEntity.ok(saleAgent);
     }
 
     @Operation(summary = "Deactivate/Delete a AgentById")
