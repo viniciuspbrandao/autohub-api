@@ -2,6 +2,7 @@ package com.vb.autohubapi.middleware.restservices.controller;
 
 import com.vb.autohubapi.middleware.restservices.api.SalesAgentApi;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentEntity;
+import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentListDataDTO;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentResponseDTO;
 import com.vb.autohubapi.middleware.restservices.service.ISalesAgentService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,12 +10,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -30,13 +30,6 @@ public class SalesAgentController implements SalesAgentApi {
     @Transactional
     public ResponseEntity<SaleAgentResponseDTO> saveNewAgentSale(@RequestBody @Valid SaleAgentEntity saleAgent) throws Exception {
         return new ResponseEntity<>(this.iSalesAgentService.saveNewAgentSale(saleAgent), HttpStatusCode.valueOf(201));
-    }
-
-    @Operation(summary = "List active agents")
-    @GetMapping
-    public ResponseEntity listActiveAgents(){
-        List<SaleAgentEntity> listActiveAgents = iSalesAgentService.getAllSaleAgentEntityActiveTrue();
-        return ResponseEntity.ok(listActiveAgents);
     }
 
     @Operation(summary = "Get agent by id")
@@ -56,4 +49,18 @@ public class SalesAgentController implements SalesAgentApi {
     public ResponseEntity disableAgentById(@PathVariable Long id) {
         return new ResponseEntity<>(this.iSalesAgentService.disableAgentById(id), HttpStatusCode.valueOf(204));
     }
+
+    @Operation(summary = "List agents")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = ""),
+            @ApiResponse(responseCode = "201", description = ""),
+            @ApiResponse(responseCode = "400", description = ""),
+            @ApiResponse(responseCode = "404", description = "")})
+    @GetMapping("/listagents")
+    public ResponseEntity<SaleAgentListDataDTO> listAgentsByStatus(
+            @RequestParam(value = "statusId", required = false) Long statusId) {
+        SaleAgentListDataDTO response = iSalesAgentService.listAgentsByStatus(statusId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }

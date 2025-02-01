@@ -1,6 +1,9 @@
 package com.vb.autohubapi.middleware.restservices.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentEntity;
+import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentListDataDTO;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -16,9 +19,6 @@ public interface SalesAgentApi {
     public ResponseEntity<SaleAgentResponseDTO> saveNewAgentSale(@RequestBody @Valid SaleAgentEntity saleAgent) throws Exception;
 
 
-    @Operation(summary = "List active agents")
-    @GetMapping
-    public ResponseEntity<SaleAgentEntity> listActiveAgents();
 
     @Operation(summary = "Get agent by Id")
     @GetMapping
@@ -27,5 +27,11 @@ public interface SalesAgentApi {
     @Operation(summary = "Disable Agent")
     @DeleteMapping
     public ResponseEntity disableAgentById(@PathVariable @NotNull @Positive Long id);
+
+
+    @Operation(summary = "List agents by status")
+    @GetMapping
+    public ResponseEntity<SaleAgentListDataDTO> listAgentsByStatus(
+            @RequestParam(value = "statusId", required = false) Long statusId) throws JsonProcessingException;
 
 }
