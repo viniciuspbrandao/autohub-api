@@ -69,7 +69,7 @@ public class CarServiceImpl implements ICarService {
     @Transactional
     public CarUpdateResponseDTO updateCar(Long id, CarEntity carDTO){
         log.info("Initiating update for car with ID: {}", id);
-        CarEntity carEntity = updateCarInDataBase(id, carDTO);
+        CarEntity carEntity = this.updateCarInDataBase(id, carDTO);
         log.info("Car with ID: {} has been successfully updated.", id);
         return carUtil.buildCarUpdateResponseDTO(carEntity);
     }

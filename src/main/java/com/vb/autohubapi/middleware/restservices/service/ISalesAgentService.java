@@ -1,5 +1,6 @@
 package com.vb.autohubapi.middleware.restservices.service;
 
+import com.vb.autohubapi.middleware.restservices.domain.saleagent.AgentUpdateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentEntity;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentListDataDTO;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentResponseDTO;
@@ -18,4 +19,6 @@ public interface ISalesAgentService {
     SaleAgentEntity getAgentById(Long id);
 
     SaleAgentListDataDTO listAgentsByStatus(Long status);
+
+    AgentUpdateResponseDTO updateAgent(Long id, SaleAgentEntity agentDTO);
 }

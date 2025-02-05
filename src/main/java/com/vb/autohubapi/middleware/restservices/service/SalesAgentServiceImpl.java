@@ -1,5 +1,6 @@
 package com.vb.autohubapi.middleware.restservices.service;
 
+import com.vb.autohubapi.middleware.restservices.domain.saleagent.AgentUpdateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentEntity;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentListDataDTO;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentResponseDTO;
@@ -117,4 +118,39 @@ public class SalesAgentServiceImpl implements ISalesAgentService {
         return saleAgentDTOs;
     }
 
+    @Transactional
+    public AgentUpdateResponseDTO updateAgent(Long id, SaleAgentEntity saleAgentDTO){
+        log.info("Initiating update for agent with ID: {}", id);
+        SaleAgentEntity saleAgent = this.updateAgentInDataBase(id, saleAgentDTO);
+        log.info("Agent with ID: {} has been successfully updated.", id);
+        return agentUtil.buildAgentUpdateResponseDTO(saleAgent);
+    }
+
+    @Transactional
+    public SaleAgentEntity updateAgentInDataBase(Long id, SaleAgentEntity saleAgentDTO) {
+
+        if (saleAgentDTO == null || String.valueOf(saleAgentDTO).isEmpty()) {
+            throw new IllegalArgumentException("O Agent deve ser valido.");
+        }
+
+        log.info("Searching for Agent with ID: {}", id);
+        SaleAgentEntity uptAgent = repository.findById(id).orElseThrow(()-> new RuntimeException("Agent not found with ID: " + id));
+
+        log.info("Agent found: {}", uptAgent);
+
+       // uptAgent.setId(saleAgentDTO.getId());
+        uptAgent.setFirstName(saleAgentDTO.getFirstName());
+        uptAgent.setLastName(saleAgentDTO.getLastName());
+        uptAgent.setEmail(saleAgentDTO.getEmail());
+        uptAgent.setPhone(saleAgentDTO.getPhone());
+        uptAgent.setPassword(saleAgentDTO.getPassword());
+        uptAgent.setAccessLevel(saleAgentDTO.getAccessLevel());
+        uptAgent.setSalary(saleAgentDTO.getSalary());
+        uptAgent.setCommission(saleAgentDTO.getCommission());
+        uptAgent.setUpdatedAt(LocalDateTime.now());
+
+        log.info("Updating Agent with new details: {}", uptAgent);
+        return repository.save(uptAgent);
+
+    }
 }

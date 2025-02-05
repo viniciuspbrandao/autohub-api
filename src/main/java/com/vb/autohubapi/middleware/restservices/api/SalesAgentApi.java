@@ -2,6 +2,7 @@ package com.vb.autohubapi.middleware.restservices.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import com.vb.autohubapi.middleware.restservices.domain.saleagent.AgentUpdateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentEntity;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentListDataDTO;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentResponseDTO;
@@ -18,7 +19,10 @@ public interface SalesAgentApi {
     @PostMapping
     public ResponseEntity<SaleAgentResponseDTO> saveNewAgentSale(@RequestBody @Valid SaleAgentEntity saleAgent) throws Exception;
 
-
+    @Operation(summary = "Update Agent in database")
+    @PutMapping
+    public ResponseEntity<AgentUpdateResponseDTO> updateAgent(
+    @PathVariable @NotNull @Positive Long id, @RequestBody @Valid SaleAgentEntity saleAgent);
 
     @Operation(summary = "Get agent by Id")
     @GetMapping

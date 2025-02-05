@@ -63,4 +63,11 @@ public class SalesAgentController implements SalesAgentApi {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Operation(summary = "Update a Agent")
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity updateAgent(@PathVariable Long id, @RequestBody @Valid SaleAgentEntity agenteDTO) {
+        return new ResponseEntity<>(this.iSalesAgentService.updateAgent(id, agenteDTO), HttpStatusCode.valueOf(200));
+    }
+
 }
