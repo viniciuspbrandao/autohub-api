@@ -1,10 +1,11 @@
-package com.vb.autohubapi.middleware.restservices.service;
+package com.vb.autohubapi.middleware.restservices.service.impl;
 
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.AgentUpdateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentEntity;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentListDataDTO;
 import com.vb.autohubapi.middleware.restservices.domain.saleagent.SaleAgentResponseDTO;
 import com.vb.autohubapi.middleware.restservices.mysql.SaleAgentRepository;
+import com.vb.autohubapi.middleware.restservices.service.ISalesAgentService;
 import com.vb.autohubapi.middleware.restservices.util.SaleAgentUtil;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;

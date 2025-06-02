@@ -1,10 +1,11 @@
-package com.vb.autohubapi.middleware.restservices.service;
+package com.vb.autohubapi.middleware.restservices.service.impl;
 
 import com.vb.autohubapi.middleware.restservices.domain.car.CarCreateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.domain.car.CarEntity;
 import com.vb.autohubapi.middleware.restservices.domain.car.CarUpdateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.infra.RequestsExceptionHandler;
 import com.vb.autohubapi.middleware.restservices.mysql.CarRepository;
+import com.vb.autohubapi.middleware.restservices.service.ICarService;
 import com.vb.autohubapi.middleware.restservices.util.CarUtil;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
