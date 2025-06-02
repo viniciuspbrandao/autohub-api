@@ -2,8 +2,9 @@ package com.vb.autohubapi.service;
 
 import com.vb.autohubapi.middleware.restservices.domain.car.CarCreateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.domain.car.CarEntity;
+import com.vb.autohubapi.middleware.restservices.domain.car.CarUpdateResponseDTO;
 import com.vb.autohubapi.middleware.restservices.mysql.CarRepository;
-import com.vb.autohubapi.middleware.restservices.service.CarServiceImpl;
+import com.vb.autohubapi.middleware.restservices.service.impl.CarServiceImpl;
 import com.vb.autohubapi.middleware.restservices.util.CarUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +16,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -31,11 +35,13 @@ class CarServiceImplTest {
     @Mock // p/ classes ou interfaces que são colaboradoras ou dependências da classe que está sendo testada.
     private CarRepository mockCarRepository;
 
-    @Mock
     private CarEntity mockCarEntity;
 
     @Mock
     private CarCreateResponseDTO carCreateResponseDTO;
+
+    @Mock
+    private CarUpdateResponseDTO carUpdateResponseDTO;
 
     @Mock
     CarUtil carUtil;
@@ -53,6 +59,9 @@ class CarServiceImplTest {
 
         carCreateResponseDTO = new CarCreateResponseDTO();
         startResponseCreate();
+
+        carUpdateResponseDTO = new CarUpdateResponseDTO();
+        startResponseUpdate();
     }
 
 
@@ -84,16 +93,60 @@ class CarServiceImplTest {
     @DisplayName("Exception test for checkFabricationYear")
     void when_fabricationYearIsUnderRule() {
 
+        // Arrange
+        mockCarEntity.setYear(2014); //input de ano inválido, gera excecao para o teste
+
         when(mockCarRepository.save(Mockito.any(CarEntity.class))).thenReturn(mockCarEntity);
 
-        try {
-            mockCarEntity.setYear(1995); //input de valor que gera excecao para o teste
-            CarCreateResponseDTO savedCar = mockServiceImpl.saveCar(mockCarEntity);
-        } catch (RuntimeException runtimeException){
-            assertEquals(RuntimeException.class, runtimeException.getClass());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        // Act & Assert
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            mockServiceImpl.saveCar(mockCarEntity);
+        });
+
+    }
+
+    @Test
+    @DisplayName("when_getAllCarsActiveTrueReturnWhereActiveIsTrue")
+    void when_getAllCarsActiveTrue() {
+
+        CarEntity activeCar = new CarEntity();
+        activeCar.setActive(true);
+
+        List<CarEntity> activeCarList = new ArrayList<>();
+        activeCarList.add(activeCar);
+
+        when(mockServiceImpl.getAllCarsActiveTrue()).thenReturn(activeCarList);
+        assertEquals(1, activeCarList.size());
+        assertTrue(activeCarList.get(0).isActive());
+
+    }
+
+    @Test
+    @DisplayName("Should return updated car response when all arguments are valid")
+    void when_updateCar_works() {
+
+        when(mockCarRepository.findById(mockCarEntity.getId())).thenReturn(Optional.ofNullable(mockCarEntity));
+        when(mockServiceImpl.updateCarInDataBase(mockCarEntity.getId(),mockCarEntity)).thenReturn(mockCarEntity);
+
+        assertDoesNotThrow(() -> mockServiceImpl.updateCar(mockCarEntity.getId(),mockCarEntity));
+    }
+
+    @Test
+    @DisplayName("Should disable car By Id")
+    void when_disableCarById() {
+
+        when(mockCarRepository.findById(mockCarEntity.getId())).thenReturn(Optional.of(mockCarEntity));
+        assertDoesNotThrow(() -> mockServiceImpl.disableCarById(mockCarEntity.getId()));
+
+    }
+
+    @Test
+    @DisplayName("Should get car By Id")
+    void when_getCarById() {
+
+        when(mockCarRepository.findById(mockCarEntity.getId())).thenReturn(Optional.of(mockCarEntity));
+        assertDoesNotThrow(() -> mockServiceImpl.getCarById(mockCarEntity.getId()));
+
     }
 
     private void startCarEntity(){
@@ -115,5 +168,11 @@ class CarServiceImplTest {
         carCreateResponseDTO.setCarId(mockCarEntity.getId());
         carCreateResponseDTO.setPlaca(mockCarEntity.getPlaca());
         carCreateResponseDTO.setCreatedDate(LocalDateTime.now());
+    }
+
+    private void startResponseUpdate() {
+        carUpdateResponseDTO.setCarId(mockCarEntity.getId());
+        carCreateResponseDTO.setPlaca(mockCarEntity.getPlaca());
+        carUpdateResponseDTO.setDhUpdate(LocalDateTime.now());
     }
 }
