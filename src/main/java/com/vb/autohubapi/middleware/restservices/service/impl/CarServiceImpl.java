@@ -40,15 +40,15 @@ public class CarServiceImpl implements ICarService {
     }
 
 
-    private CarEntity createCarEntity(CarEntity carDTO) throws Exception {
+    private CarEntity createCarEntity(CarEntity newCar) throws Exception {
 
         try {
             log.info("Creating a new car");
 
-            checkIfCarExistInDB(carDTO);
-            checkCarAgeForSalesPotential(carDTO);
+            checkIfCarExistInDB(newCar);
+            checkCarAgeForSalesPotential(newCar);
 
-            CarEntity carEntity = new CarEntity(carDTO);
+            CarEntity carEntity = new CarEntity(newCar);
             carEntity.setCreatedDate(LocalDateTime.now());
 
             repository.save(carEntity);
@@ -117,7 +117,7 @@ public class CarServiceImpl implements ICarService {
 
     private void checkIfCarExistInDB(CarEntity dto) throws RequestsExceptionHandler {
 
-        if (dto != null && !dto.getPlaca().trim().isEmpty()) {
+        if (dto != null && dto.getPlaca() != null && !dto.getPlaca().trim().isEmpty()) {
 
             String placaNewCar = dto.getPlaca().trim();
             Optional<CarEntity> optionalPlaca = repository.findByPlaca(placaNewCar);

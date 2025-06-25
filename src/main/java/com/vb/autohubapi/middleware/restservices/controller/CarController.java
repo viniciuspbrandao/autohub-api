@@ -35,8 +35,8 @@ public class CarController implements CarApi {
     @Operation(summary = "Create a new car")
     @PostMapping
     @Transactional
-    public ResponseEntity<CarCreateResponseDTO> insertCar(@RequestBody @Valid CarEntity dto) throws Exception {
-        return new ResponseEntity<>(this.iService.saveCar(dto), HttpStatusCode.valueOf(201));
+    public ResponseEntity<CarCreateResponseDTO> insertCar(@RequestBody @Valid CarEntity newCar) throws Exception {
+        return new ResponseEntity<>(this.iService.saveCar(newCar), HttpStatusCode.valueOf(201));
     }
 
     @Operation(summary = "Update a car")
