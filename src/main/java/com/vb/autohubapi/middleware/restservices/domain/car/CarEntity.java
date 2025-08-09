@@ -30,7 +30,7 @@ public class CarEntity {
     @Column(name = "model")
     private String model;
 
-    @Column(name = "year")
+    @Column(name = "car_year")
     private int year;
 
     @Column(name = "preco_aquisicao")
